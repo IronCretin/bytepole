@@ -134,6 +134,11 @@ void exec(char* code)
                 continue;
             }
         }
+        else if (instr == 'I')
+        {
+            push(pos, &stack);
+        }
+        
         else if (instr == 'l')
         {
             push(mem[pop(&stack)], &stack);

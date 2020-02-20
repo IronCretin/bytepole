@@ -171,8 +171,13 @@ int main(int argc, char **argv)
         {
             if (c == '\\')
             {
-                if ((c = getchar()) == 'n') {
+                if ((c = getchar()) == 'n')
+                {
                     code[i++] = '\n';
+                }
+                if (c == '\\')
+                {
+                    code[i++] = '\\';
                 }
             }
             else

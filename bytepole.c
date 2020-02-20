@@ -152,6 +152,7 @@ void exec(char* code)
         }
         pos++;
     }
+    free(stack.stack);
 }
 
 int main(int argc, char **argv)

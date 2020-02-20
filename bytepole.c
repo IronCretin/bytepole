@@ -156,11 +156,33 @@ void exec(char* code)
 
 int main(int argc, char **argv)
 {
+    char* code;
     if (argc > 1)
     {
-        char* code = argv[1];
-        exec(code);
+        code = argv[1];
     }
+    else
+    {
+        printf("> ");
+        code = malloc(256);
+        char c;
+        int i = 0;
+        while ((c = getchar()) != '\n')
+        {
+            if (c == '\\')
+            {
+                if ((c = getchar()) == 'n') {
+                    code[i++] = '\n';
+                }
+            }
+            else
+            {
+                code[i++] = c;
+            }
+        }
+    }
+    
+    exec(code);
     putchar('\n');
     return 0;
 }

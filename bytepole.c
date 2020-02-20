@@ -136,11 +136,11 @@ void exec(char* code)
         }
         else if (instr == 'l')
         {
-                push(mem[pop(&stack)], &stack);
+            push(mem[pop(&stack)], &stack);
         }
         else if (instr == 's')
         {
-                mem[pop(&stack)] = pop(&stack);
+            mem[pop(&stack)] = pop(&stack);
         }
         else if (instr == ' ')
         {

@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <readline/readline.h>
+#include <readline/history.h>
+
 typedef unsigned char BYTE;
 
 typedef struct Stack {
@@ -10,7 +13,8 @@ typedef struct Stack {
     BYTE *stack;
 } Stack;
 
-BYTE pop(Stack *stack) {
+BYTE pop(Stack *stack)
+{
     return stack->stack[--stack->top];
 }
 
@@ -163,37 +167,16 @@ void exec(char* code)
 int main(int argc, char **argv)
 {
     char* code;
-    if (argc > 1)
+    while ((code = readline("> ")) != NULL)
     {
-        code = argv[1];
-    }
-    else
-    {
-        printf("> ");
-        code = malloc(256);
-        char c;
-        int i = 0;
-        while ((c = getchar()) != '\n')
-        {
-            if (c == '\\')
-            {
-                if ((c = getchar()) == 'n')
-                {
-                    code[i++] = '\n';
-                }
-                if (c == '\\')
-                {
-                    code[i++] = '\\';
-                }
-            }
-            else
-            {
-                code[i++] = c;
-            }
+        if (strlen(code) > 0) {
+            add_history(code);
         }
+        
+        exec(code);
+        putchar('\n');
+        free(code);
     }
     
-    exec(code);
-    putchar('\n');
     return 0;
 }
